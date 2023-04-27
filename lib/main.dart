@@ -87,8 +87,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Expanded(
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text(item.title!),
+                        Text(
+                          item.title!,
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
                         const SizedBox(
                           height: 10,
                         ),
@@ -96,9 +100,12 @@ class _MyHomePageState extends State<MyHomePage> {
                         const SizedBox(
                           height: 10,
                         ),
-                        Text(item.price!.toString()),
-                        const SizedBox(
-                          width: 10,
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            item.price!.toString(),
+                            textAlign: TextAlign.start,
+                          ),
                         ),
                       ],
                     ),
