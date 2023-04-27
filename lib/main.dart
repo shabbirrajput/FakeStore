@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
+
   final String title;
 
   @override
@@ -47,7 +48,6 @@ class _MyHomePageState extends State<MyHomePage> {
         await ApiProvider().getMethod('https://fakestoreapi.com/products');
     mProductModel = List<ProductModel>.from(
         jsonDecode(response).map((model) => ProductModel.fromJson(model)));
-    print('object--------------->${mProductModel.length}');
     setState(() {});
   }
 
@@ -55,6 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          /*elevation: 0,*/
           title: Text(widget.title),
         ),
         body: ListView.builder(
