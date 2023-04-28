@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:fake_store/apiProvider/api_provider.dart';
+import 'package:fake_store/auth/sign_in.dart';
 import 'package:fake_store/model/product_model.dart';
 import 'package:flutter/material.dart';
 
@@ -15,12 +16,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Fake Store',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Fake Store'),
-    );
+        title: 'Fake Store',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: const SignIn()
+        /*const MyHomePage(title: 'Fake Store'),*/
+        );
   }
 }
 
@@ -44,8 +46,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void initData() async {
-    var response =
-        await ApiProvider().getMethod('https://fakestoreapi.com/products');
+    var response = await ApiProvider()
+        .getMethod('https://fakestoreapi.com/products/category/jewelery');
     mProductModel = List<ProductModel>.from(
         jsonDecode(response).map((model) => ProductModel.fromJson(model)));
     setState(() {});
@@ -55,6 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.deepPurpleAccent,
           /*elevation: 0,*/
           title: Text(widget.title),
         ),
