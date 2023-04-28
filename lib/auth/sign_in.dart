@@ -16,7 +16,7 @@ class _SignInState extends State<SignIn> {
 
   void login(String email, password) async {
     try {
-      Response response = await post(Uri.parse('https://reqres.in/api/logins'),
+      Response response = await post(Uri.parse('https://reqres.in/api/login'),
           body: {'email': email, 'password': password});
 
       if (response.statusCode == 200) {
