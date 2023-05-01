@@ -12,7 +12,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -47,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void initData() async {
     var response = await ApiProvider()
-        .getMethod('https://fakestoreapi.com/products/category/jewelery');
+        .getMethod('https://fakestoreapi.com/products/category/electronics');
     mProductModel = List<ProductModel>.from(
         jsonDecode(response).map((model) => ProductModel.fromJson(model)));
     setState(() {});

@@ -1,7 +1,10 @@
 import 'dart:convert';
 
+import 'package:fake_store/main.dart';
+import 'package:fake_store/model/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -11,6 +14,8 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  final Future<SharedPreferences> _pref = SharedPreferences.getInstance();
+
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -23,14 +28,23 @@ class _SignInState extends State<SignIn> {
         var data = jsonDecode(response.body.toString());
         print(data['token']);
         print('StatusCode------------------>${response.statusCode}');
-        print('Login created successfully');
+        print('Login successfully');
       } else {
+        print('responseBODY----->${response.body}');
         print('StatusCode------------------>${response.statusCode}');
         print('failed');
       }
     } catch (e) {
       print(e.toString());
     }
+  }
+
+  Future setSP(UserModel user) async {
+    final SharedPreferences sp = await _pref;
+
+    print('object----------------> Shared_Preferences');
+    sp.setString("email", user.email!);
+    sp.setString("pass", user.password!);
   }
 
   @override
@@ -91,11 +105,11 @@ class _SignInState extends State<SignIn> {
                 onPressed: () {
                   login(emailController.text.toString(),
                       passwordController.text.toString());
-                  /*Navigator.push(
+                  Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              const MyHomePage(title: 'Fake Store')));*/
+                              const MyHomePage(title: 'Fake Store')));
                 },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.resolveWith<Color?>(
